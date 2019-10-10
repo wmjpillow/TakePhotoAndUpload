@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <!-- <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" /> -->\n\n    <!-- <input type=\"file\" (change)=\"onFileSelected($event)\"> -->\n    <!-- <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button> -->\n    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div> -->\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" /> \n\n    <!-- <input type=\"file\" (change)=\"onFileSelected($event)\">\n  <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>  \n    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div> -->\n<!-- </ion-content>  -->\n"
 
 /***/ }),
 
@@ -88,16 +88,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let HomePage = class HomePage {
-    // capturedSnapURL:string;
-    // cameraOptions: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
     constructor(camera, http) {
         this.camera = camera;
         this.http = http;
+        this.cameraOptions = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.selectedFile = null;
+    }
+    takeSnap() {
+        this.camera.getPicture(this.cameraOptions).then((imageData) => {
+            // this.camera.DestinationType.FILE_URI gives file URI saved in local
+            // this.camera.DestinationType.DATA_URL gives base64 URI
+            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.capturedSnapURL = base64Image;
+        }, (err) => {
+            console.log(err);
+            // Handle error
+        });
+    }
+    onFileSelected(event) {
+        console.log(event);
+        this.selectedFile = event.target.files[0];
+    }
+    onUpload() {
+        const fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
+            .subscribe(res => {
+            console.log(res);
+        });
     }
 };
 HomePage.ctorParameters = () => [

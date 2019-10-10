@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <!-- <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" /> -->\n\n    <!-- <input type=\"file\" (change)=\"onFileSelected($event)\"> -->\n    <!-- <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button> -->\n    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div> -->\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" /> \n\n    <!-- <input type=\"file\" (change)=\"onFileSelected($event)\">\n  <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>  \n    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div> -->\n<!-- </ion-content>  -->\n"
 
 /***/ }),
 
@@ -91,17 +91,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomePage = /** @class */ (function () {
-    // capturedSnapURL:string;
-    // cameraOptions: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
     function HomePage(camera, http) {
         this.camera = camera;
         this.http = http;
+        this.cameraOptions = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.selectedFile = null;
     }
+    HomePage.prototype.takeSnap = function () {
+        var _this = this;
+        this.camera.getPicture(this.cameraOptions).then(function (imageData) {
+            // this.camera.DestinationType.FILE_URI gives file URI saved in local
+            // this.camera.DestinationType.DATA_URL gives base64 URI
+            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            _this.capturedSnapURL = base64Image;
+        }, function (err) {
+            console.log(err);
+            // Handle error
+        });
+    };
+    HomePage.prototype.onFileSelected = function (event) {
+        console.log(event);
+        this.selectedFile = event.target.files[0];
+    };
+    HomePage.prototype.onUpload = function () {
+        var fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
     HomePage.ctorParameters = function () { return [
         { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"] },
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
