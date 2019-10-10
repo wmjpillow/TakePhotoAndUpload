@@ -515,26 +515,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
 
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    // capturedSnapURL:string;
-    // cameraOptions: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
-    function AppComponent(platform, splashScreen, statusBar
-    // private camera: Camera, 
-    // private http: HttpClient
-    ) {
+    function AppComponent(platform, splashScreen, statusBar, camera, http) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.camera = camera;
+        this.http = http;
+        this.cameraOptions = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.selectedFile = null;
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -544,10 +547,36 @@ var AppComponent = /** @class */ (function () {
             _this.splashScreen.hide();
         });
     };
+    AppComponent.prototype.takeSnap = function () {
+        var _this = this;
+        this.camera.getPicture(this.cameraOptions).then(function (imageData) {
+            // this.camera.DestinationType.FILE_URI gives file URI saved in local
+            // this.camera.DestinationType.DATA_URL gives base64 URI
+            var base64Image = 'data:image/jpeg;base64,' + imageData;
+            _this.capturedSnapURL = base64Image;
+        }, function (err) {
+            console.log(err);
+            // Handle error
+        });
+    };
+    AppComponent.prototype.onFileSelected = function (event) {
+        console.log(event);
+        this.selectedFile = event.target.files[0];
+    };
+    AppComponent.prototype.onUpload = function () {
+        var fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
     AppComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
         { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
+        { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__["Camera"] },
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -557,10 +586,9 @@ var AppComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
-            // private camera: Camera, 
-            // private http: HttpClient
-        ])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
+            _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__["Camera"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]])
     ], AppComponent);
     return AppComponent;
 }());

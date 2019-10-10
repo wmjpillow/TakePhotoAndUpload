@@ -13,19 +13,19 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent {
 
-  // capturedSnapURL:string;
-  // cameraOptions: CameraOptions = {
-  //   quality: 100,
-  //   destinationType: this.camera.DestinationType.DATA_URL,
-  //   encodingType: this.camera.EncodingType.JPEG,
-  //   mediaType: this.camera.MediaType.PICTURE
-  // }
+  capturedSnapURL:string;
+  cameraOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-    // private camera: Camera, 
-    // private http: HttpClient
+    private statusBar: StatusBar,
+    private camera: Camera, 
+    private http: HttpClient
   ) {
     this.initializeApp();
   }
@@ -37,31 +37,31 @@ export class AppComponent {
     });
   }
 
-  // takeSnap() {
-  //   this.camera.getPicture(this.cameraOptions).then((imageData) => {
-  //     // this.camera.DestinationType.FILE_URI gives file URI saved in local
-  //     // this.camera.DestinationType.DATA_URL gives base64 URI
+  takeSnap() {
+    this.camera.getPicture(this.cameraOptions).then((imageData) => {
+      // this.camera.DestinationType.FILE_URI gives file URI saved in local
+      // this.camera.DestinationType.DATA_URL gives base64 URI
       
-  //     let base64Image = 'data:image/jpeg;base64,' + imageData;
-  //     this.capturedSnapURL = base64Image;
-  //   }, (err) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.capturedSnapURL = base64Image;
+    }, (err) => {
       
-  //     console.log(err);
-  //     // Handle error
-  //   });
-  // }
+      console.log(err);
+      // Handle error
+    });
+  }
 
-  // selectedFile: File=null;
-  // onFileSelected(event){
-  //   console.log(event);
-  //   this.selectedFile= <File>event.target.files[0];
-  // }
-  // onUpload(){
-  //   const fd= new FormData();
-  //   fd.append('image',this.selectedFile,this.selectedFile.name);
-  //   this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage',fd)
-  //    .subscribe(res =>{
-  //      console.log(res);
-  //    });
-  // }
+  selectedFile: File=null;
+  onFileSelected(event){
+    console.log(event);
+    this.selectedFile= <File>event.target.files[0];
+  }
+  onUpload(){
+    const fd= new FormData();
+    fd.append('image',this.selectedFile,this.selectedFile.name);
+    this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage',fd)
+     .subscribe(res =>{
+       console.log(res);
+     });
+  }
 }
