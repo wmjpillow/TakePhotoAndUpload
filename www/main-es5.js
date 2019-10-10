@@ -447,7 +447,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n    \n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n        \n      </ion-toolbar>\n    </ion-header>\n    \n    <ion-content>\n      <!-- <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    </ion-content>\n\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
 
 /***/ }),
 
@@ -521,7 +521,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    // capturedSnapURL:string;
+    // cameraOptions: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
+    function AppComponent(platform, splashScreen, statusBar
+    // private camera: Camera, 
+    // private http: HttpClient
+    ) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
@@ -547,7 +557,10 @@ var AppComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
+            // private camera: Camera, 
+            // private http: HttpClient
+        ])
     ], AppComponent);
     return AppComponent;
 }());
