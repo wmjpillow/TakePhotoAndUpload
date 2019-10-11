@@ -31,19 +31,19 @@ export class HomePage {
     });
   }
 
-  selectedFile: File=null;
-  onFileSelected(event){
-    console.log(event);
-    this.selectedFile= <File>event.target.files[0];
-  }
-  onUpload(){
-    const fd= new FormData();
-    fd.append('image',this.selectedFile,this.selectedFile.name);
-    this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage',fd)
-     .subscribe(res =>{
-       console.log(res);
-     });
-  }
+  // selectedFile: File=null;
+  // onFileSelected(event){
+  //   console.log(event);
+  //   this.selectedFile= <File>event.target.files[0];
+  // }
+  // onUpload(){
+  //   const fd= new FormData();
+  //   fd.append('image',this.selectedFile,this.selectedFile.name);
+  //   this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage',fd)
+  //    .subscribe(res =>{
+  //      console.log(res);
+  //    });
+  // }
 
 
 }

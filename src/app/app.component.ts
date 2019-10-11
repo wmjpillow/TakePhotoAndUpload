@@ -13,19 +13,10 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent {
 
-  capturedSnapURL:string;
-  cameraOptions: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private camera: Camera, 
-    private http: HttpClient
   ) {
     this.initializeApp();
   }
@@ -36,21 +27,11 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+}
 
-  takeSnap() {
-    this.camera.getPicture(this.cameraOptions).then((imageData) => {
-      // this.camera.DestinationType.FILE_URI gives file URI saved in local
-      // this.camera.DestinationType.DATA_URL gives base64 URI
-      
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.capturedSnapURL = base64Image;
-    }, (err) => {
-      
-      console.log(err);
-      // Handle error
-    });
+export class MyFileUploadComponent{
+  constructor( private http: HttpClient){
   }
-
   selectedFile: File=null;
   onFileSelected(event){
     console.log(event);

@@ -447,7 +447,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n    \n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n        \n      </ion-toolbar>\n    </ion-header>\n    \n    <ion-content>\n      <!-- <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    </ion-content>\n\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
+module.exports = "<ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n   \n   \n    \n    <!-- <ion-content> -->\n      <!-- <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    <!-- </ion-content> -->\n\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
 
 /***/ }),
 
@@ -504,20 +504,19 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
-/*! exports provided: AppComponent */
+/*! exports provided: AppComponent, MyFileUploadComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyFileUploadComponent", function() { return MyFileUploadComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 
 
 
@@ -525,19 +524,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, camera, http) {
+    function AppComponent(platform, splashScreen, statusBar) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
-        this.camera = camera;
-        this.http = http;
-        this.cameraOptions = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        };
-        this.selectedFile = null;
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -547,36 +537,10 @@ var AppComponent = /** @class */ (function () {
             _this.splashScreen.hide();
         });
     };
-    AppComponent.prototype.takeSnap = function () {
-        var _this = this;
-        this.camera.getPicture(this.cameraOptions).then(function (imageData) {
-            // this.camera.DestinationType.FILE_URI gives file URI saved in local
-            // this.camera.DestinationType.DATA_URL gives base64 URI
-            var base64Image = 'data:image/jpeg;base64,' + imageData;
-            _this.capturedSnapURL = base64Image;
-        }, function (err) {
-            console.log(err);
-            // Handle error
-        });
-    };
-    AppComponent.prototype.onFileSelected = function (event) {
-        console.log(event);
-        this.selectedFile = event.target.files[0];
-    };
-    AppComponent.prototype.onUpload = function () {
-        var fd = new FormData();
-        fd.append('image', this.selectedFile, this.selectedFile.name);
-        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
-            .subscribe(function (res) {
-            console.log(res);
-        });
-    };
     AppComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
         { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-        { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__["Camera"] },
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -586,11 +550,32 @@ var AppComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-            _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_5__["Camera"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"]])
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
     ], AppComponent);
     return AppComponent;
+}());
+
+var MyFileUploadComponent = /** @class */ (function () {
+    function MyFileUploadComponent(http) {
+        this.http = http;
+        this.selectedFile = null;
+    }
+    MyFileUploadComponent.prototype.onFileSelected = function (event) {
+        console.log(event);
+        this.selectedFile = event.target.files[0];
+    };
+    MyFileUploadComponent.prototype.onUpload = function () {
+        var fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
+    MyFileUploadComponent.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] }
+    ]; };
+    return MyFileUploadComponent;
 }());
 
 

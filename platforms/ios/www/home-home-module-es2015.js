@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" /> \n\n    <!-- <input type=\"file\" (change)=\"onFileSelected($event)\">\n  <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>  \n    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    The world is your oyster.\n    <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n  </div> -->\n<!-- </ion-content>  -->\n"
+module.exports = "<!-- <ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n    \n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n        \n      </ion-toolbar>\n    </ion-header>\n    \n    <ion-content>\n      <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    <!-- </ion-content> -->\n\n<!-- \n  </ion-router-outlet>\n</ion-app>  -->"
 
 /***/ }),
 
@@ -97,7 +97,6 @@ let HomePage = class HomePage {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE
         };
-        this.selectedFile = null;
     }
     takeSnap() {
         this.camera.getPicture(this.cameraOptions).then((imageData) => {
@@ -108,18 +107,6 @@ let HomePage = class HomePage {
         }, (err) => {
             console.log(err);
             // Handle error
-        });
-    }
-    onFileSelected(event) {
-        console.log(event);
-        this.selectedFile = event.target.files[0];
-    }
-    onUpload() {
-        const fd = new FormData();
-        fd.append('image', this.selectedFile, this.selectedFile.name);
-        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
-            .subscribe(res => {
-            console.log(res);
         });
     }
 };
