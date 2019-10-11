@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n    \n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n        \n      </ion-toolbar>\n    </ion-header>\n    \n    <ion-content>\n      <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    <!-- </ion-content> -->\n\n<!-- \n  </ion-router-outlet>\n</ion-app>  -->"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" />\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-toolbar>\n    <input type=\"file\" (change)=\"onFileSelected($event)\">\n    <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n  </ion-toolbar>  \n</ion-content>"
 
 /***/ }),
 
@@ -73,12 +73,13 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*!***********************************!*\
   !*** ./src/app/home/home.page.ts ***!
   \***********************************/
-/*! exports provided: HomePage */
+/*! exports provided: HomePage, MyFileUploadComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyFileUploadComponent", function() { return MyFileUploadComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
@@ -123,6 +124,27 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
 ], HomePage);
 
+class MyFileUploadComponent {
+    constructor(http) {
+        this.http = http;
+        this.selectedFile = null;
+    }
+    onFileSelected(event) {
+        console.log(event);
+        this.selectedFile = event.target.files[0];
+    }
+    onUpload() {
+        const fd = new FormData();
+        fd.append('image', this.selectedFile, this.selectedFile.name);
+        this.http.post('https://us-central1-major-s-firebase.cloudfunctions.net/addMessage', fd)
+            .subscribe(res => {
+            console.log(res);
+        });
+    }
+}
+MyFileUploadComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+];
 
 
 /***/ })
