@@ -447,7 +447,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet>\n    <!-- <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content> -->\n   \n   \n    \n    <!-- <ion-content> -->\n      <!-- <div class=\"ion-padding\">\n        The world is your oyster.\n        <p>If you get lost, the <a target=\"_blank\" rel=\"noopener\" href=\"https://ionicframework.com/docs/\">docs</a> will be your guide.</p>\n      </div> -->\n    <!-- </ion-content> -->\n\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
+module.exports = "<ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
 
 /***/ }),
 
@@ -527,6 +527,13 @@ var AppComponent = /** @class */ (function () {
         this.statusBar = statusBar;
         this.initializeApp();
     }
+    // capturedSnapURL:string;
+    // cameraOptions: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
