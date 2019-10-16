@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {HttpClient} from '@angular/common/http';
+import {HomePage} from '../app/home/home.page';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  rootPage:any;
+  rootPage = HomePage;
   
   // constructor(
   //   private platform: Platform,

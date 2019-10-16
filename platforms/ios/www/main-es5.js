@@ -447,7 +447,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n\n  </ion-router-outlet>\n</ion-app> -->\n\n\n"
+module.exports = "<!-- <ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n\n  </ion-router-outlet>\n</ion-app> -->\n\n\n<ion-nav [root]=\"rootPage\"></ion-nav>  \n\n\n"
 
 /***/ }),
 
