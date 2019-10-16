@@ -12,10 +12,6 @@
               "xml": "<string>You can take photos</string>",
               "count": 1,
               "id": "config.xml"
-            },
-            {
-              "xml": "<string>This app needs camera access</string>",
-              "count": 1
             }
           ],
           "NSMicrophoneUsageDescription": [

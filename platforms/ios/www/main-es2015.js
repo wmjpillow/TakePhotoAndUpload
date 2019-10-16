@@ -441,7 +441,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n\n  </ion-router-outlet>\n</ion-app>\n\n\n"
+module.exports = "<!-- <ion-app>\n  <ion-router-outlet>\n    <ion-header>\n      <ion-toolbar>\n        <ion-button (click)=\"takeSnap()\">\n          Take Snap\n        </ion-button>\n        <img [src]=\"capturedSnapURL\" />\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-toolbar>\n        <input type=\"file\" (change)=\"onFileSelected($event)\">\n        <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n      </ion-toolbar>  \n    </ion-content>\n\n  </ion-router-outlet>\n</ion-app> -->\n\n\n"
 
 /***/ }),
 
@@ -503,49 +503,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-
-
-
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar) {
-        this.platform = platform;
-        this.splashScreen = splashScreen;
-        this.statusBar = statusBar;
-        this.initializeApp();
-    }
-    // capturedSnapURL:string;
-    // cameraOptions: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
-    initializeApp() {
-        this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-        });
-    }
 };
-AppComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-    { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
-];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-root',
         template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
         styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
-        _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+    })
 ], AppComponent);
 
 

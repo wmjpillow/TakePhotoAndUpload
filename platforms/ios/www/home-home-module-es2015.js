@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" />\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-toolbar>\n    <input type=\"file\" (change)=\"onFileSelected($event)\">\n    <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n  </ion-toolbar>  \n</ion-content> -->"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-button (click)=\"takeSnap()\">\n      Take Snap\n    </ion-button>\n    <img [src]=\"capturedSnapURL\" />\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-toolbar>\n    <input type=\"file\" (change)=\"onFileSelected($event)\">\n    <ion-button type=\"button\" (click)=\"onUpload()\">Upload</ion-button>\n  </ion-toolbar>  \n</ion-content>"
 
 /***/ }),
 
