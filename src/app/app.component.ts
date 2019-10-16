@@ -15,14 +15,14 @@ import {HomePage} from '../app/home/home.page';
 export class AppComponent {
   rootPage = HomePage;
   
-  // constructor(
-  //   private platform: Platform,
-  //   private splashScreen: SplashScreen,
-  //   private statusBar: StatusBar,
-    // private camera: Camera, private http: HttpClient
-  // ) {
-  //   this.initializeApp();
-  // }
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private camera: Camera, private http: HttpClient
+  ) {
+    this.initializeApp();
+  }
   // capturedSnapURL:string;
   // cameraOptions: CameraOptions = {
   //   quality: 100,
@@ -30,12 +30,12 @@ export class AppComponent {
   //   encodingType: this.camera.EncodingType.JPEG,
   //   mediaType: this.camera.MediaType.PICTURE
   // }
-  // initializeApp() {
-  //   this.platform.ready().then(() => {
-  //     this.statusBar.styleDefault();
-  //     this.splashScreen.hide();
-  //   });
-  // }
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
 
   // takeSnap() {
   //   this.camera.getPicture(this.cameraOptions).then((imageData) => {
