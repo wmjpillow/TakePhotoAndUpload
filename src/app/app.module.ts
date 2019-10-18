@@ -22,6 +22,6 @@ import { Camera } from '@ionic-native/camera/ngx';
     HttpClientModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [HomePage]
 })
 export class AppModule {}
