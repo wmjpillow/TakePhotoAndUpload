@@ -86,9 +86,9 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-ionic-webview": "4.1.2",
+    "cordova-plugin-ios-camera-permissions": "1.2.0",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-ios-camera-permissions": "1.2.0"
+    "cordova-plugin-whitelist": "1.3.3"
   };
 });

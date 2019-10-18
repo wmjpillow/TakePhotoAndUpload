@@ -13,7 +13,7 @@ import {HomePage} from '../app/home/home.page';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  rootPage = HomePage;
+  rootPage: any = HomePage;
   
   constructor(
     private platform: Platform,
