@@ -5,6 +5,9 @@ this is a simple ios App to take a photo and then upload to firebase using ionic
 ![GitHub Logo](takephoto.gif)
 
 
+https://www.jianshu.com/p/5ec30170a0f9
+
+
 //Ionic 3 and Angular 2: Using the Native Camera, Take Multiple Photos with Delete Action:
 https://www.9lessons.info/2017/04/ionic2-angular2-camera-native-multiple.html
 
